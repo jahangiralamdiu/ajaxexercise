@@ -12,8 +12,7 @@ and open the template in the editor.
     </head>
     <body>
         <p>
-            <a href="message.txt" onclick="grabFile(this.href);
-        return false;">
+            <a id="alink" href="message.txt" >
                 Click here to see the contents of a text file
             </a>
         </p>
@@ -69,6 +68,11 @@ and open the template in the editor.
                     }
                 }
             }
+            
+            var link = document.getElementById('alink');
+            
+            link.addEventListener("click", grabFile(this.href));
+            
         </script>
     </body>
 </html>
