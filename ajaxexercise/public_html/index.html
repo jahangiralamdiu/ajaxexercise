@@ -12,12 +12,25 @@ and open the template in the editor.
     </head>
     <body>
         <p>
-            <a id="alink" href="message.txt" >
+            <a id="alink" href="country.txt" onclick="grabFile(datafile);
+                    return false;">
                 Click here to see the contents of a text file
             </a>
-        </p>
+
+        <p id="demo"></p>
+
 
         <script>
+
+           // obj = JSON.parse(text);
+            //document.getElementById("demo").innerHTML =
+                    //obj.countries[1].country[1].country_name;
+
+          var datafile = "country.txt";
+
+           //var dataobj = JSON.parse('datafile');
+
+            //document.getElementById("demo").innerHTML = dataobj.countries[1];
 
             function getHTTPObject()
             {
@@ -45,11 +58,11 @@ and open the template in the editor.
                 return xhr;
             }
 
-            function grabFile(file) 
+            function grabFile(file)
             {
                 var request = getHTTPObject();
                 if (request) {
-                    request.onreadystatechange = function() 
+                    request.onreadystatechange = function()
                     {
                         displayResponse(request);
                     };
@@ -58,21 +71,23 @@ and open the template in the editor.
                 }
             }
 
-            function displayResponse(request) 
+            function displayResponse(request)
             {
-                if (request.readyState == 4) 
+                if (request.readyState == 4)
                 {
-                    if (request.status == 200 || request.status == 304) 
+                    if (request.status == 200 || request.status == 304)
                     {
                         alert(request.responseText);
+                        
+                        var countryNames = JSON.parse(request.responseText);
+                        
+                        console.log(typeof countryNames);
                     }
                 }
             }
-            
-            var link = document.getElementById('alink');
-            
-            link.addEventListener("click", grabFile(this.href));
-            
+
+           
+
         </script>
     </body>
 </html>
