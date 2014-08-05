@@ -1,102 +1,44 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
-<html>
-    <head>
-        <title>TODO supply a title</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    </head>
-    <body>
-        <p>
-            <a id="alink" href="country.txt" onclick="grabFile(datafile);
-                    return false;">
-                Click here to see all country names
-            </a>
+var xhr = new XMLHttpRequest();
 
-        <p id="demo"></p>
+var xhr = new ActiveXObject("Microsoft.XMLHTTP"); // for IE
+
+if(window.XMLHttpRequest){
+	var xhr = new XMLHttpRequest();
+} 
+
+if(window.ActiveXObject){
+	var xhr = new ActiveXObject("Microsoft.XMLHTTP");	
+} // this is called object detection to test for the existence of ActiveX
+
+// wrap up the object in a reusable function
+function getHTTPObject(){
+	var xhr= false;
+	if(window.XMLHttpRequest){
+		xhr = new XMLHttpRequest();
+	}
+	else if(window.ActiveXObject){
+		xhr = new ActiveXObject("Microsoft.XMLHTTP");
+	}
+	return xhr;
+} // this function is called getHTTPObject
+// Question: Why that var xhr =false declaration?
 
 
-        <script>
-
-           // obj = JSON.parse(text);
-            //document.getElementById("demo").innerHTML =
-                    //obj.countries[1].country[1].country_name;
-
-          var datafile = "country.txt";
-
-           //var dataobj = JSON.parse('datafile');
-
-            //document.getElementById("demo").innerHTML = dataobj.countries[1];
-
-            function getHTTPObject()
-            {
-                var xhr = false;
-                if (window.XMLHttpRequest) {
-                    xhr = new XMLHttpRequest();
-                }
-                else if (window.ActiveXObject)
-                {
-                    try
-                    {
-                        xhr = new ActiveXObject("Msxml2.XMLHTTP");
-                    } catch (e)
-                    {
-                        try
-                        {
-                            xhr = new ActiveXObject("Microsoft.XMLHTTP");
-                        } catch (e)
-                        {
-                            xhr = false;
-                        }
-                    }
-
-                }
-                return xhr;
-            }
-
-            function grabFile(file)
-            {
-                var request = getHTTPObject();
-                if (request) {
-                    request.onreadystatechange = function()
-                    {
-                        displayResponse(request);
-                    };
-                    request.open("GET", file, true);
-                    request.send(null);
-                }
-            }
-
-            function displayResponse(request)
-            {
-                if (request.readyState == 4)
-                {
-                    if (request.status == 200 || request.status == 304)
-                    {
-                        
-                        
-                        var countryNames = JSON.parse(request.responseText);
-                        
-                    
-                        for(var i = 0; i<=countryNames.countries.length; i++)
-                        {
-                           document.writeln(countryNames.countries[i].country.country_id + " : ");
-                           document.writeln(countryNames.countries[i].country.country_name);
-                           document.write("<br/>");
-                        }
-                        //alert(countryNames.countries[1].country.country_name);
-                        
-                        console.log(typeof countryNames);
-                    }
-                }
-            }
-
-           
-
-        </script>
-    </body>
-</html>
+function getHTTPObject() {
+	var xhr = false;
+	if (window.XMLHttpRequest) {
+	xhr = new XMLHttpRequest();
+	} else if (window.ActiveXObject) {
+	try {
+	xhr = new ActiveXObject("Msxml2.XMLHTTP");
+	XMLHttpRequest 51
+	} catch(e) {
+	try {
+	xhr = new ActiveXObject("Microsoft.XMLHTTP");
+	} catch(e) {
+	xhr = false;
+	}
+	}
+	}
+	return xhr;
+	}
