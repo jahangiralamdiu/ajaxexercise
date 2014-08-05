@@ -14,7 +14,7 @@ and open the template in the editor.
         <p>
             <a id="alink" href="country.txt" onclick="grabFile(datafile);
                     return false;">
-                Click here to see the contents of a text file
+                Click here to see all country names
             </a>
 
         <p id="demo"></p>
@@ -77,9 +77,18 @@ and open the template in the editor.
                 {
                     if (request.status == 200 || request.status == 304)
                     {
-                        alert(request.responseText);
+                        
                         
                         var countryNames = JSON.parse(request.responseText);
+                        
+                    
+                        for(var i = 0; i<=countryNames.countries.length; i++)
+                        {
+                           document.writeln(countryNames.countries[i].country.country_id + " : ");
+                           document.writeln(countryNames.countries[i].country.country_name);
+                           document.write("<br/>");
+                        }
+                        //alert(countryNames.countries[1].country.country_name);
                         
                         console.log(typeof countryNames);
                     }
