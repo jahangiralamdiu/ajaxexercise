@@ -19,6 +19,7 @@ return xhr;
 	//grabFile function - set the request in motion using the send method.
 
 	function grabFile(file) {
+               
 		var request = getHTTPObject();
 		if (request) {
 		request.onreadystatechange = function() {
